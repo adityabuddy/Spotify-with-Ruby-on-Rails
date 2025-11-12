@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_11_105628) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_12_044810) do
   create_table "albums", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -21,6 +21,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_105628) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "name"
+    t.integer "users_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["users_id"], name: "index_playlists_on_users_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -37,4 +45,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_105628) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "playlists", "users", column: "users_id"
 end
